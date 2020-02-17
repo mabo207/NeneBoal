@@ -4,17 +4,18 @@
 const int32_t GameManager::s_backColor = TFT_BLACK;
 
 GameManager::GameManager()
-	:m_boalX(M5.Lcd.width()/2),m_boalY(M5.Lcd.height()/2)
+	:m_boal(m5.Lcd.width()/2,m5.Lcd.height()/2,1,1)
 {}
 
 void GameManager::Update(){
 	// ボールの移動
-	m_boalX += 1;
+	m_boal.VelocityUpdate(); // 速度の更新
+	m_boal.Move(); // 移動処理
 }
 
 void GameManager::Draw()const{
 	// オブジェクトを全消去
-	m5.Lcd.fillCircle(m_boalX - 1, m_boalY - 0, 2, s_backColor);
+	m_boal.BeforeErase();
 	// 描画処理
-	m5.Lcd.fillCircle(m_boalX, m_boalY, 2, TFT_YELLOW);
+	m_boal.Object::Base::Draw();
 }

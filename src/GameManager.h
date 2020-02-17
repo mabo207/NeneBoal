@@ -2,6 +2,7 @@
 #define DEF_GAMEMANAGER_H
 
 #include<stdint.h>
+#include"Object\Boal.h"
 
 // ゲームを管理するクラス
 class GameManager{
@@ -14,7 +15,7 @@ public:
 	static const int32_t s_backColor; // 背景色、他から呼び出すことができるようにpublicに。
 
 private:
-	int16_t m_boalX, m_boalY;
+	Object::Boal m_boal;
 };
 
 #endif
