@@ -1,6 +1,7 @@
 #include <M5Stack.h>
 #include "GameManager.h"
 #include "m5sensor.h"
+#include "Object\Base.h"
 
 static GameManager s_manager;
 static unsigned long microsPerReading, microsPrevious;
@@ -10,6 +11,9 @@ void setup() {
 	M5.begin();
 	Wire.begin();
 	M5Sensor::Init();
+	// m5stack等を初期化した後に初期化すべきものの初期化
+	Object::Base::InitParameter();
+
 	microsPerReading = 1000000 / fps;
 	microsPrevious = micros();
 }

@@ -21,19 +21,29 @@ namespace Object{
 		int16_t GetVY() const;
 		uint32_t GetColor() const;
 
+		// 静的変数
+		static void InitParameter();
+		static int16_t GetCoordinateWidth(); // 外部からの変更を防ぐためのgetter
+		static int16_t GetCoordinateHeight(); // 外部からの変更を防ぐためのgetter
+		static const int16_t s_lcdExpantion; // 座標計算時の拡大率
+
 	protected:
 		// コンストラクタ
 		Base(int16_t x, int16_t y, int16_t vx, int16_t vy, uint32_t color);
 		// デストラクタ
 		virtual ~Base() = default;
 		// 描画方法を定義する
-		virtual void Draw(int16_t x, int16_t y, uint32_t color) const = 0;
+		virtual void Draw(int16_t drawX, int16_t drawY, uint32_t color) const = 0;
 
 		int16_t m_vx, m_vy; // 速度(上位クラスで更新する可能性がある)
 
 	private:
 		int16_t m_x, m_y; // 位置(必ずMove()で更新する)
 		const uint32_t m_color;
+
+		// 静的変数
+		static int16_t s_coordinateWidth;  // 拡大率を考慮した座標系の横幅
+		static int16_t s_coordinateHeight; // 拡大率を考慮した座標系の縦幅
 	};
 }
 

@@ -3,12 +3,14 @@
 
 #include<stdint.h>
 #include"Object\Boal.h"
+#include<memory>
 
 // ゲームを管理するクラス
 class GameManager{
 public:
 	GameManager();
 	~GameManager() = default;
+	void Init();
 	void Update();
 	void Draw() const;
 
