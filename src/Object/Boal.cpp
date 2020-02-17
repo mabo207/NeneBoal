@@ -1,7 +1,11 @@
 #include<M5Stack.h>
 #include"Boal.h"
+#include"m5sensor.h"
 
 void Object::Boal::VelocityUpdate(){
+	const double gravity = 7.0; // 重力加速度
+	m_vx += std::sin(M5Sensor::s_sensor.m_postureFilter.getPitchRadians()) * gravity;
+	m_vy += std::sin(M5Sensor::s_sensor.m_postureFilter.getRollRadians()) * gravity;
 	// 場外に行かないようにする
 	if(GetX()+GetVX()<0){
 		m_vx = -GetX();
