@@ -8,6 +8,7 @@ static const unsigned long fps = 60;
 
 void setup() {
 	M5.begin();
+	Wire.begin();
 	M5Sensor::Init();
 	microsPerReading = 1000000 / fps;
 	microsPrevious = micros();
