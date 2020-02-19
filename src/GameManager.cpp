@@ -16,7 +16,7 @@ void GameManager::Update(){
 
 void GameManager::Draw()const{
 	// オブジェクトを全消去
-	m5.Lcd.fillRect(40, 120, 160, 60, s_backColor);
+	m5.Lcd.fillRect(40, 120, 160, 100, s_backColor);
 	m_boal.BeforeErase();
 	// 描画処理
 	m_boal.Object::Base::Draw();
