@@ -24,6 +24,12 @@ void loop() {
 	if (nowMicros - microsPrevious >= microsPerReading){
 		M5.update();
 		M5Sensor::s_sensor.Update();
+		// ボタン入力時のジャイロセンサーの初期化
+		if (m5.BtnB.isReleased()==0){
+			// ジャイロに不具合を感じたら真ん中のボタンを押せば修正できる
+			M5Sensor::Init();
+		}
+
 		// プログラムの更新
 		s_manager.Update();
 		s_manager.Draw();
