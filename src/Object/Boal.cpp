@@ -34,9 +34,9 @@ void Object::Boal::VelocityUpdate(){
 
 Object::Boal::Boal(int16_t x, int16_t y, int16_t vx, int16_t vy)
 	:Base(x,y,vx,vy,TFT_YELLOW)
-	,m_radius(4*s_lcdExpantion)
+	,m_radius(4<<s_lcdExpantionBit)
 {}
 
 void Object::Boal::Draw(int16_t drawX, int16_t drawY, uint32_t color)const{
-	m5.Lcd.fillCircle(drawX, drawY, m_radius / s_lcdExpantion, color);
+	m5.Lcd.fillCircle(drawX, drawY, m_radius >> s_lcdExpantionBit, color);
 }

@@ -2,31 +2,29 @@
 #include"Base.h"
 #include"GameManager.h"
 
-const int16_t Object::Base::s_lcdExpantion = 32;
+const uint8_t Object::Base::s_lcdExpantionBit = 5;
 // これらのパラメータは後で初期化する。m5が初期化されていないため、width(),height()の向きが逆になる場合がある
 int16_t Object::Base::s_coordinateWidth;
 int16_t Object::Base::s_coordinateHeight;
-// const int16_t Object::Base::s_coordinateWidth = m5.Lcd.width() * Object::Base::s_lcdExpantion;
-// const int16_t Object::Base::s_coordinateHeight = m5.Lcd.height() * Object::Base::s_lcdExpantion;
 
 void Object::Base::InitParameter(){
-	s_coordinateWidth = m5.Lcd.width() * Object::Base::s_lcdExpantion;
-	s_coordinateHeight = m5.Lcd.height() * Object::Base::s_lcdExpantion;
+	s_coordinateWidth = m5.Lcd.width() << Object::Base::s_lcdExpantionBit;
+	s_coordinateHeight = m5.Lcd.height() << Object::Base::s_lcdExpantionBit;
 }
 
 void Object::Base::Draw()const{
 	// 拡大率を考慮し描画位置を計算して描画する
-	Draw(m_x / s_lcdExpantion, m_y / s_lcdExpantion, m_color);
+	Draw(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, m_color);
 }
 
 void Object::Base::Draw(uint32_t color)const{
 	// 拡大率を考慮し描画位置を計算して描画する
-	Draw(m_x / s_lcdExpantion, m_y / s_lcdExpantion, color);
+	Draw(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, color);
 }
 
 void Object::Base::BeforeErase()const{
 	// 移動前の位置を背景色で塗りつぶす
-	Draw((m_x - m_vx) / s_lcdExpantion, (m_y - m_vy) / s_lcdExpantion, GameManager::s_backColor);
+	Draw((m_x - m_vx) >> s_lcdExpantionBit, (m_y - m_vy) >> s_lcdExpantionBit, GameManager::s_backColor);
 }
 
 void Object::Base::Move(){

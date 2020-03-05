@@ -25,7 +25,7 @@ namespace Object{
 		static void InitParameter();
 		static int16_t GetCoordinateWidth(); // 外部からの変更を防ぐためのgetter
 		static int16_t GetCoordinateHeight(); // 外部からの変更を防ぐためのgetter
-		static const int16_t s_lcdExpantion; // 座標計算時の拡大率
+		static const uint8_t s_lcdExpantionBit; // s_lcdExpantionが何bitのシフトに当たるのか
 
 	protected:
 		// コンストラクタ
