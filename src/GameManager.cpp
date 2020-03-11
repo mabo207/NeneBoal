@@ -6,6 +6,10 @@ const int32_t GameManager::s_backColor = TFT_BLACK;
 
 GameManager::GameManager()
 	: m_boal(Object::Base::GetCoordinateWidth() / 2, Object::Base::GetCoordinateHeight() / 2, 0, 0)
+	, m_terrainList{Object::Terrain(0, 0, TFT_WHITE, 150, 7680),
+					Object::Terrain(0, 0, TFT_WHITE, 10240, 150),
+					Object::Terrain(10240 - 150, 0, TFT_WHITE, 150, 7680),
+					Object::Terrain(0, 7680 - 150, TFT_WHITE, 10240, 150)}
 {
 }
 
@@ -21,7 +25,16 @@ void GameManager::Draw() const
 	// オブジェクトを全消去
 	m5.Lcd.fillRect(40, 120, 160, 100, s_backColor);
 	m_boal.BeforeErase();
+	for (const Object::Terrain &terrain : m_terrainList)
+	{
+		terrain.BeforeErase();
+	}
+
 	// 描画処理
+	for (const Object::Terrain &terrain : m_terrainList)
+	{
+		terrain.Draw();
+	}
 	m_boal.Object::Base::Draw();
 	m5.Lcd.drawString("X:", 40, 120);
 	m5.Lcd.drawNumber(m_boal.GetX(), 100, 120);
@@ -31,6 +44,6 @@ void GameManager::Draw() const
 	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getPitch() * 100, 100, 160);
 	m5.Lcd.drawString("roll:", 40, 180);
 	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getRoll() * 100, 100, 180);
-	m5.Lcd.drawString("yaw:", 40, 200);
-	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getYaw() * 100, 100, 200);
+	m5.Lcd.drawString("yaw:", 40, 1000);
+	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getYaw() * 100, 100, 1000);
 }

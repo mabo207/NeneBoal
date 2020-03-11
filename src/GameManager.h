@@ -1,9 +1,10 @@
 #ifndef DEF_GAMEMANAGER_H
 #define DEF_GAMEMANAGER_H
 
-#include <stdint.h>
 #include "Object\Boal.h"
-#include <memory>
+#include "Object\Terrain.h"
+#include <stdint.h>
+#include <vector>
 
 // ゲームを管理するクラス
 class GameManager
@@ -19,6 +20,7 @@ public:
 
 private:
 	Object::Boal m_boal;
+	std::vector<Object::Terrain> m_terrainList;
 };
 
 #endif
