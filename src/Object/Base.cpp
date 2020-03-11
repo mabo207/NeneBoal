@@ -27,8 +27,11 @@ void Object::Base::Draw(uint32_t color) const
 
 void Object::Base::BeforeErase() const
 {
-	// 移動前の位置を背景色で塗りつぶす
-	DrawWithShrinkedParameter((m_x - m_vx) >> s_lcdExpantionBit, (m_y - m_vy) >> s_lcdExpantionBit, GameManager::s_backColor);
+	if (m_vx != 0 || m_vy != 0)
+	{
+		// 移動前の位置を背景色で塗りつぶす
+		DrawWithShrinkedParameter((m_x - m_vx) >> s_lcdExpantionBit, (m_y - m_vy) >> s_lcdExpantionBit, GameManager::s_backColor);
+	}
 }
 
 void Object::Base::Move()
