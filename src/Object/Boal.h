@@ -16,7 +16,7 @@ namespace Object
 
 	protected:
 	private:
-		void Draw(int16_t drawX, int16_t drawY, uint32_t color) const;
+		void DrawWithShrinkedParameter(int16_t drawX, int16_t drawY, uint32_t color) const;
 
 		const uint16_t m_radius; // ボールの半径
 	};

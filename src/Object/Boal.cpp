@@ -47,7 +47,7 @@ Object::Boal::Boal(int16_t x, int16_t y, int16_t vx, int16_t vy)
 {
 }
 
-void Object::Boal::Draw(int16_t drawX, int16_t drawY, uint32_t color) const
+void Object::Boal::DrawWithShrinkedParameter(int16_t drawX, int16_t drawY, uint32_t color) const
 {
 	m5.Lcd.fillCircle(drawX, drawY, m_radius >> s_lcdExpantionBit, color);
 }

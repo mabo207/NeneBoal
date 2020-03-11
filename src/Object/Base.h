@@ -34,8 +34,8 @@ namespace Object
 		Base(int16_t x, int16_t y, int16_t vx, int16_t vy, uint32_t color);
 		// デストラクタ
 		virtual ~Base() = default;
-		// 描画方法を定義する
-		virtual void Draw(int16_t drawX, int16_t drawY, uint32_t color) const = 0;
+		// 描画方法を定義する(拡大処理済み)
+		virtual void DrawWithShrinkedParameter(int16_t drawX, int16_t drawY, uint32_t color) const = 0;
 
 		int16_t m_vx, m_vy; // 速度(上位クラスで更新する可能性がある)
 

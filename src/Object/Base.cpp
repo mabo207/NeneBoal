@@ -16,19 +16,19 @@ void Object::Base::InitParameter()
 void Object::Base::Draw() const
 {
 	// 拡大率を考慮し描画位置を計算して描画する
-	Draw(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, m_color);
+	DrawWithShrinkedParameter(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, m_color);
 }
 
 void Object::Base::Draw(uint32_t color) const
 {
 	// 拡大率を考慮し描画位置を計算して描画する
-	Draw(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, color);
+	DrawWithShrinkedParameter(m_x >> s_lcdExpantionBit, m_y >> s_lcdExpantionBit, color);
 }
 
 void Object::Base::BeforeErase() const
 {
 	// 移動前の位置を背景色で塗りつぶす
-	Draw((m_x - m_vx) >> s_lcdExpantionBit, (m_y - m_vy) >> s_lcdExpantionBit, GameManager::s_backColor);
+	DrawWithShrinkedParameter((m_x - m_vx) >> s_lcdExpantionBit, (m_y - m_vy) >> s_lcdExpantionBit, GameManager::s_backColor);
 }
 
 void Object::Base::Move()
