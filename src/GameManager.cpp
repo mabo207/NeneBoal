@@ -44,6 +44,6 @@ void GameManager::Draw() const
 	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getPitch() * 100, 100, 160);
 	m5.Lcd.drawString("roll:", 40, 180);
 	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getRoll() * 100, 100, 180);
-	m5.Lcd.drawString("yaw:", 40, 1000);
-	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getYaw() * 100, 100, 1000);
+	m5.Lcd.drawString("yaw:", 40, 200);
+	m5.Lcd.drawNumber(M5Sensor::s_sensor.m_postureFilter.getYaw() * 100, 100, 200);
 }
