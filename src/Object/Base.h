@@ -24,9 +24,8 @@ namespace Object
 		uint32_t GetColor() const;
 
 		// 静的変数
-		static void InitParameter();
-		static int16_t GetCoordinateWidth();	// 外部からの変更を防ぐためのgetter
-		static int16_t GetCoordinateHeight();   // 外部からの変更を防ぐためのgetter
+		static int16_t s_coordinateWidth;  // 拡大率を考慮した座標系の横幅
+		static int16_t s_coordinateHeight; // 拡大率を考慮した座標系の縦幅
 		static const uint8_t s_lcdExpantionBit; // s_lcdExpantionが何bitのシフトに当たるのか
 
 	protected:
@@ -42,10 +41,6 @@ namespace Object
 	private:
 		int16_t m_x, m_y; // 位置(必ずMove()で更新する)
 		const uint32_t m_color;
-
-		// 静的変数
-		static int16_t s_coordinateWidth;  // 拡大率を考慮した座標系の横幅
-		static int16_t s_coordinateHeight; // 拡大率を考慮した座標系の縦幅
 	};
 } // namespace Object
 

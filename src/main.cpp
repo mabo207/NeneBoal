@@ -13,7 +13,6 @@ void setup()
 	Wire.begin();
 	M5Sensor::Init();
 	// m5stack等を初期化した後に初期化すべきものの初期化
-	Object::Base::InitParameter();
 
 	microsPerReading = 1000000 / fps;
 	microsPrevious = micros();

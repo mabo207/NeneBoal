@@ -27,17 +27,17 @@ void Object::Boal::VelocityUpdate()
 	{
 		m_vx = -GetX();
 	}
-	else if (GetX() + GetVX() > GetCoordinateWidth())
+	else if (GetX() + GetVX() > s_coordinateWidth)
 	{
-		m_vx = GetCoordinateWidth() - GetX();
+		m_vx = s_coordinateWidth - GetX();
 	}
 	if (GetY() + GetVY() < 0)
 	{
 		m_vy = -GetY();
 	}
-	else if (GetY() + GetVY() > GetCoordinateHeight())
+	else if (GetY() + GetVY() > s_coordinateHeight)
 	{
-		m_vy = GetCoordinateHeight() - GetY();
+		m_vy = s_coordinateHeight - GetY();
 	}
 }
 
