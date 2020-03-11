@@ -78,6 +78,37 @@ void Object::Boal::VelocityUpdate(const std::vector<Object::Terrain> &terrainLis
 				m_vy = terrain.GetY() + terrain.GetHeight() - GetY() + m_radius;
 			}
 		}
+		// 壁の外部からの4頂点とボールの当たり判定
+		// std::sqrt()は重いので、斜め45度線で当たり判定をごまかして高速化する
+		const int16_t diffX = GetX() - terrain.GetX(),
+					  diffY = GetY() - terrain.GetY();
+		const int16_t sumV = m_vx + m_vy,
+					  subV = m_vx - m_vy; // これらの値は除算に用いられるが、0の時は除算の処理に入らないので問題ない
+		if (diffX - terrain.GetWidth() > 0 && diffY - terrain.GetHeight() > 0 && -terrain.GetWidth() + diffY - terrain.GetHeight() >= m_radius && diffX - terrain.GetWidth() + diffY - terrain.GetHeight() + sumV < m_radius)
+		{
+			// 右下の頂点
+			// m_vxとm_vyを同じ割合だけ削ると、その場で動かなくなってしまうので、45度線に垂直な方向に押し出す
+			m_vx += (m_radius - diffX + terrain.GetWidth() - diffY + terrain.GetHeight() - sumV) / 2;
+			m_vy += (m_radius - diffX + terrain.GetWidth() - diffY + terrain.GetHeight() - sumV) / 2;
+		}
+		else if (diffX - terrain.GetWidth() > 0 && diffY < 0 && diffX - terrain.GetWidth() - diffY >= m_radius && diffX - terrain.GetWidth() - diffY + subV < m_radius)
+		{
+			// 右上の頂点
+			m_vx += (m_radius - diffX + terrain.GetWidth() + diffY - subV) / 2;
+			m_vy -= (m_radius - diffX + terrain.GetWidth() + diffY - subV) / 2;
+		}
+		else if (diffX < 0 && diffY - terrain.GetHeight() > 0 && -diffX + diffY - terrain.GetHeight() >= m_radius && -diffX + diffY - terrain.GetHeight() - subV < m_radius)
+		{
+			// 左下の頂点
+			m_vx -= -(m_radius + diffX - diffY + terrain.GetHeight() + subV) / 2;
+			m_vy += -(m_radius + diffX - diffY + terrain.GetHeight() + subV) * m_vy / subV;
+		}
+		else if (diffX < 0 && diffY < 0 && -diffX - diffY >= m_radius && -diffX - diffY - sumV < m_radius)
+		{
+			// 左上の頂点
+			m_vx -= -(m_radius + diffX + diffY + sumV) / 2;
+			m_vy -= -(m_radius + diffX + diffY + sumV) / 2;
+		}
 	}
 }
 
