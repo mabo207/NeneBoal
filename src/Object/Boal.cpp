@@ -2,7 +2,7 @@
 #include "m5sensor.h"
 #include <M5Stack.h>
 
-void Object::Boal::VelocityUpdate()
+void Object::Boal::VelocityUpdate(const std::vector<Object::Terrain> &terrainList)
 {
 	// 加速度を加える
 	const double gravity = 16.0; // 重力加速度
@@ -22,22 +22,62 @@ void Object::Boal::VelocityUpdate()
 	const int16_t multiple = 19, divide = 20;
 	m_vx = m_vx * multiple / divide;
 	m_vy = m_vy * multiple / divide;
-	// 場外に行かないようにする
-	if (GetX() + GetVX() < 0)
+	// 障害物(xy軸に垂直な長方形)との当たり判定
+	for (const Terrain &terrain : terrainList)
 	{
-		m_vx = -GetX();
-	}
-	else if (GetX() + GetVX() > s_coordinateWidth)
-	{
-		m_vx = s_coordinateWidth - GetX();
-	}
-	if (GetY() + GetVY() < 0)
-	{
-		m_vy = -GetY();
-	}
-	else if (GetY() + GetVY() > s_coordinateHeight)
-	{
-		m_vy = s_coordinateHeight - GetY();
+		// 重くならないよう、簡易な当たり判定にする
+		// y軸並行辺との当たり判定
+		if (GetY() >= terrain.GetY() && GetY() <= terrain.GetY() + terrain.GetHeight())
+		{
+			// 左y軸並行辺との当たり判定
+			if (GetX() + m_radius <= terrain.GetX() && GetX() + m_radius + m_vx > terrain.GetX())
+			{
+				// ボールの右端と左y軸並行辺の交差判定
+				m_vx = terrain.GetX() - GetX() - m_radius;
+			}
+			else if (GetX() - m_radius >= terrain.GetX() && GetX() - m_radius + m_vx < terrain.GetX())
+			{
+				// ボールの左端と左y軸並行辺の交差判定
+				m_vx = terrain.GetX() - GetX() + m_radius;
+			}
+			//右y軸並行辺との当たり判定
+			if (GetX() + m_radius <= terrain.GetX() + terrain.GetWidth() && GetX() + m_radius + m_vx > terrain.GetX() + terrain.GetWidth())
+			{
+				// ボールの右端と左y軸並行辺の交差判定
+				m_vx = terrain.GetX() + terrain.GetWidth() - GetX() - m_radius;
+			}
+			else if (GetX() - m_radius >= terrain.GetX() + terrain.GetWidth() && GetX() - m_radius + m_vx < terrain.GetX() + terrain.GetWidth())
+			{
+				// ボールの左端と右y軸並行辺の交差判定
+				m_vx = terrain.GetX() + terrain.GetWidth() - GetX() + m_radius;
+			}
+		}
+		// x軸並行辺との当たり判定
+		if (GetX() >= terrain.GetX() && GetX() <= terrain.GetX() + terrain.GetWidth())
+		{
+			// 上x軸並行辺との当たり判定
+			if (GetY() + m_radius <= terrain.GetY() && GetY() + m_radius + m_vy > terrain.GetY())
+			{
+				// ボールの下端と上x軸並行辺の交差判定
+				m_vy = terrain.GetY() - GetY() - m_radius;
+			}
+			else if (GetY() - m_radius >= terrain.GetY() && GetY() - m_radius + m_vy < terrain.GetY())
+			{
+				// ボールの上端と上x軸並行辺の交差判定
+				m_vy = terrain.GetY() - GetY() + m_radius;
+			}
+			//下x軸並行辺との当たり判定
+			if (GetY() + m_radius <= terrain.GetY() + terrain.GetHeight() && GetY() + m_radius + m_vy > terrain.GetY() + terrain.GetHeight())
+			{
+				// ボールの下端と下x軸並行辺の交差判定
+				m_vy = terrain.GetY() + terrain.GetHeight() - GetY() - m_radius;
+			}
+			else if (GetY() - m_radius >= terrain.GetY() + terrain.GetHeight() && GetY() - m_radius + m_vy < terrain.GetY() + terrain.GetHeight())
+			{
+				// ボールの上端と下x軸並行辺の交差判定
+				m_vy = terrain.GetY() + terrain.GetHeight() - GetY() + m_radius;
+			}
+		}
 	}
 }
 
