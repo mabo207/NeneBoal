@@ -1,12 +1,13 @@
 #ifndef DEF_GAMEMANAGER_H
 #define DEF_GAMEMANAGER_H
 
-#include<stdint.h>
-#include"Object\Boal.h"
-#include<memory>
+#include <stdint.h>
+#include "Object\Boal.h"
+#include <memory>
 
 // ゲームを管理するクラス
-class GameManager{
+class GameManager
+{
 public:
 	GameManager();
 	~GameManager() = default;

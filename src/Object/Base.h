@@ -1,11 +1,13 @@
 #ifndef DEF_OBJECT_BASE_H
 #define DEF_OBJECT_BASE_H
 
-#include<stdint.h>
+#include <stdint.h>
 
-namespace Object{
+namespace Object
+{
 	// 全てのオブジェクトはBaseを継承する
-	class Base{
+	class Base
+	{
 	public:
 		// 現在位置に描画
 		void Draw() const;
@@ -23,8 +25,8 @@ namespace Object{
 
 		// 静的変数
 		static void InitParameter();
-		static int16_t GetCoordinateWidth(); // 外部からの変更を防ぐためのgetter
-		static int16_t GetCoordinateHeight(); // 外部からの変更を防ぐためのgetter
+		static int16_t GetCoordinateWidth();	// 外部からの変更を防ぐためのgetter
+		static int16_t GetCoordinateHeight();   // 外部からの変更を防ぐためのgetter
 		static const uint8_t s_lcdExpantionBit; // s_lcdExpantionが何bitのシフトに当たるのか
 
 	protected:
@@ -45,6 +47,6 @@ namespace Object{
 		static int16_t s_coordinateWidth;  // 拡大率を考慮した座標系の横幅
 		static int16_t s_coordinateHeight; // 拡大率を考慮した座標系の縦幅
 	};
-}
+} // namespace Object
 
 #endif

@@ -1,20 +1,23 @@
-#include <M5Stack.h>
 #include "GameManager.h"
 #include "m5sensor.h"
+#include <M5Stack.h>
 
 const int32_t GameManager::s_backColor = TFT_BLACK;
 
 GameManager::GameManager()
-	:m_boal(Object::Base::GetCoordinateWidth()/2,Object::Base::GetCoordinateHeight()/2,0,0)
-{}
-
-void GameManager::Update(){
-	// ボールの移動
-	m_boal.VelocityUpdate(); // 速度の更新
-	m_boal.Move(); // 移動処理
+	: m_boal(Object::Base::GetCoordinateWidth() / 2, Object::Base::GetCoordinateHeight() / 2, 0, 0)
+{
 }
 
-void GameManager::Draw()const{
+void GameManager::Update()
+{
+	// ボールの移動
+	m_boal.VelocityUpdate(); // 速度の更新
+	m_boal.Move();			 // 移動処理
+}
+
+void GameManager::Draw() const
+{
 	// オブジェクトを全消去
 	m5.Lcd.fillRect(40, 120, 160, 100, s_backColor);
 	m_boal.BeforeErase();

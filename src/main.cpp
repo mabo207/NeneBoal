@@ -1,13 +1,14 @@
-#include <M5Stack.h>
 #include "GameManager.h"
-#include "m5sensor.h"
 #include "Object\Base.h"
+#include "m5sensor.h"
+#include <M5Stack.h>
 
 static GameManager s_manager;
 static unsigned long microsPerReading, microsPrevious;
 static const unsigned long fps = 60;
 
-void setup() {
+void setup()
+{
 	M5.begin();
 	Wire.begin();
 	M5Sensor::Init();
@@ -18,14 +19,17 @@ void setup() {
 	microsPrevious = micros();
 }
 
-void loop() {
+void loop()
+{
 	// マイコン側の更新
 	const unsigned long nowMicros = micros();
-	if (nowMicros - microsPrevious >= microsPerReading){
+	if (nowMicros - microsPrevious >= microsPerReading)
+	{
 		M5.update();
 		M5Sensor::s_sensor.Update();
 		// ボタン入力時のジャイロセンサーの初期化
-		if (m5.BtnB.isReleased()==0){
+		if (m5.BtnB.isReleased() == 0)
+		{
 			// ジャイロに不具合を感じたら真ん中のボタンを押せば修正できる
 			M5Sensor::Init();
 		}
