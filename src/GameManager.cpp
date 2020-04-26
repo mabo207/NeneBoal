@@ -5,15 +5,14 @@
 const int32_t GameManager::s_backColor = TFT_BLACK;
 
 GameManager::GameManager()
-	: m_boal(Object::Base::s_coordinateWidth / 100, Object::Base::s_coordinateHeight / 100, 0, 0)
-	// , m_terrainList{Object::Terrain(0, 0, TFT_WHITE, 150, 7680),
-	// 				Object::Terrain(0, 0, TFT_WHITE, 10240, 150),
-	// 				Object::Terrain(10090, 0, TFT_WHITE, 150, 7680),
-	// 				Object::Terrain(0, 7530, TFT_WHITE, 10240, 150),
-	// 				Object::Terrain(2000, 2680, TFT_WHITE, 150, 5000),
-	// 				Object::Terrain(0, 4000, TFT_WHITE, 1500, 150),
-	// 				Object::Terrain(7000, 1000, TFT_WHITE, 3240, 150)}
-	, m_terrainList{Object::Terrain(4000, 3000, TFT_WHITE, 2000, 1000)}
+	: m_boal(Object::Base::s_coordinateWidth / 2, Object::Base::s_coordinateHeight / 2, 0, 0)
+	, m_terrainList{Object::Terrain(0, 0, TFT_WHITE, 150, 7680),
+					Object::Terrain(0, 0, TFT_WHITE, 10240, 150),
+					Object::Terrain(10090, 0, TFT_WHITE, 150, 7680),
+					Object::Terrain(0, 7530, TFT_WHITE, 10240, 150),
+					Object::Terrain(2000, 2680, TFT_WHITE, 150, 5000),
+					Object::Terrain(0, 4000, TFT_WHITE, 1500, 150),
+					Object::Terrain(7000, 1000, TFT_WHITE, 3240, 150)}
 {
 }
 
