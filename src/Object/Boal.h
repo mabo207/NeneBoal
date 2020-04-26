@@ -2,6 +2,8 @@
 #define DEF_OBJECT_BOAL_H
 
 #include "Base.h"
+#include "Terrain.h"
+#include <vector>
 
 namespace Object
 {
@@ -12,7 +14,7 @@ namespace Object
 		Boal(int16_t x, int16_t y, int16_t vx, int16_t vy);
 		~Boal() = default;
 		// 速度の更新
-		void VelocityUpdate();
+		void VelocityUpdate(const std::vector<Terrain> &terrainList);
 
 	protected:
 	private:

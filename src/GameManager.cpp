@@ -19,8 +19,8 @@ GameManager::GameManager()
 void GameManager::Update()
 {
 	// ボールの移動
-	m_boal.VelocityUpdate(); // 速度の更新
-	m_boal.Move();			 // 移動処理
+	m_boal.VelocityUpdate(m_terrainList); // 速度の更新
+	m_boal.Move();						  // 移動処理
 }
 
 void GameManager::Draw() const
