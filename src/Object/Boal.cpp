@@ -1,13 +1,13 @@
 #include "Boal.h"
-#include "m5sensor.h"
+#include "System\m5sensor.h"
 #include <M5Stack.h>
 
 void Object::Boal::VelocityUpdate(const std::vector<Object::Terrain> &terrainList)
 {
 	// 加速度を加える
 	const double gravity = 16.0; // 重力加速度
-	const float sinPitch = std::sin(M5Sensor::s_sensor.m_postureFilter.getPitchRadians());
-	const float sinRoll = std::sin(M5Sensor::s_sensor.m_postureFilter.getRollRadians());
+	const float sinPitch = std::sin(System::M5Sensor::s_sensor.m_postureFilter.getPitchRadians());
+	const float sinRoll = std::sin(System::M5Sensor::s_sensor.m_postureFilter.getRollRadians());
 	if (sinPitch >= 0.2 || sinPitch <= -0.2)
 	{
 		// 10度以下の傾きは無視

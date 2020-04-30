@@ -1,5 +1,4 @@
 #include "GameManager.h"
-#include "m5sensor.h"
 #include <M5Stack.h>
 
 const int32_t GameManager::s_backColor = TFT_BLACK;

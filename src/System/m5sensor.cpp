@@ -1,9 +1,9 @@
 #include "m5sensor.h"
 #include <M5Stack.h>
 
-M5Sensor M5Sensor::s_sensor = M5Sensor();
+System::M5Sensor System::M5Sensor::s_sensor = M5Sensor();
 
-M5Sensor::M5Sensor()
+System::M5Sensor::M5Sensor()
 {
 	// ジャイロセンサーの初期化
 	m_mpu9250.initMPU9250();
@@ -12,9 +12,9 @@ M5Sensor::M5Sensor()
 	m_postureFilter.begin(60);
 }
 
-M5Sensor::~M5Sensor() {}
+System::M5Sensor::~M5Sensor() {}
 
-void M5Sensor::Update()
+void System::M5Sensor::Update()
 {
 	// ジャイロセンサーから姿勢情報を計算するためのデータを取得
 	if (!(m_mpu9250.readByte(MPU9250_ADDRESS, INT_STATUS) & 0x01))
@@ -37,7 +37,7 @@ void M5Sensor::Update()
 	m_postureFilter.updateIMU(m_mpu9250.gx, m_mpu9250.gy, m_mpu9250.gz, m_mpu9250.ax, m_mpu9250.ay, m_mpu9250.az);
 }
 
-void M5Sensor::Init()
+void System::M5Sensor::Init()
 {
 	s_sensor = M5Sensor();
 }
